@@ -60,7 +60,7 @@ tbody.addEventListener('click', (e) => {
 
 formContainer.innerHTML = `
   <form class="new-employee-form">
-    <label>Name: <input name="nameInput" data-qa="name" type="text" required></label>
+    <label>Name: <input name="name" data-qa="name" type="text" required></label>
     <label>Position: <input name="position" data-qa="position" type="text" required></label>
     <label>Office:
       <select name="office" data-qa="office" required>
@@ -87,6 +87,8 @@ const pushNotification = (posTop, posRight, title, description, type) => {
   const messageTitle = document.createElement('h2');
   const messageInfo = document.createElement('p');
 
+  messageBlock.dataset.qa = 'notification';
+
   messageBlock.classList.add('notification', type);
   messageTitle.classList.add('title');
 
@@ -108,9 +110,9 @@ const pushNotification = (posTop, posRight, title, description, type) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const { nameInput, position, office, age, salary } = form.elements;
+  const { name: employeeName, position, office, age, salary } = form.elements;
   const ageVal = Number(age.value);
-  const nameVal = nameInput.value.trim();
+  const nameVal = employeeName.value.trim();
   const newRow = tbody.insertRow();
 
   if (nameVal.length < 4) {
