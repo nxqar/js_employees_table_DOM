@@ -155,7 +155,17 @@ form.addEventListener('submit', (e) => {
 tbody.addEventListener('dblclick', (e) => {
   const td = e.target.closest('td');
 
-  if (!td || td.querySelector('input')) {
+  if (!td) {
+    return;
+  }
+
+  const activeInput = tbody.querySelector('.cell-input');
+
+  if (activeInput) {
+    activeInput.blur();
+  }
+
+  if (td.querySelector('.cell-input')) {
     return;
   }
 
@@ -177,8 +187,8 @@ tbody.addEventListener('dblclick', (e) => {
 
   input.addEventListener('blur', save);
 
-  input.addEventListener('keydown', (el) => {
-    if (el.key === 'Enter') {
+  input.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') {
       input.blur();
     }
   });
